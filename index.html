@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100e0c">
+  <title>Novyra | Şəxsi rəqəmsal jurnal</title>
+
+  <style>
+    :root {
+      --bg: #100e0c;
+      --panel: #191613;
+      --panel-light: #211c17;
+      --gold: #bda16a;
+      --gold-light: #ddc899;
+      --text: #f1eadf;
+      --muted: #a69a88;
+      --border: #3a3024;
+      --danger: #a85c5c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      min-height: 100vh;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      width: min(100%, 1000px);
+      margin: auto;
+      padding: 18px;
+    }
+
+    header {
+      text-align: center;
+      padding: 25px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      color: var(--gold-light);
+      font-size: 38px;
+      letter-spacing: 7px;
+      margin: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 3px;
+      margin-top: 10px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    h2, h3 {
+      color: var(--gold-light);
+      font-weight: normal;
+    }
+
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 12px 0 6px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      color: var(--text);
+      background: #100e0c;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 11px;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--gold);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 180px;
+      line-height: 1.8;
+    }
+
+    button {
+      background: var(--gold);
+      color: #17120b;
+      border: none;
+      border-radius: 7px;
+      padding: 10px 14px;
+      margin: 4px 3px 4px 0;
+    }
+
+    button.secondary {
+      background: var(--panel-light);
+      color: var(--gold-light);
+      border: 1px solid var(--border);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .row > * {
+      flex: 1;
+      min-width: 100px;
+    }
+
+    .cover {
+      text-align: center;
+      padding: 35px 20px;
+      border: 1px solid var(--gold);
+      background:
+        radial-gradient(ellipse at top, #33271b 0%, #191613 55%, #100e0c 100%);
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .cover img {
+      display: block;
+      max-width: 100%;
+      max-height: 260px;
+      margin: 18px auto;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .page-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .page-number {
+      color: var(--gold-light);
+      font-size: 14px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .palette {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .color-dot {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      padding: 0;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 260px;
+      background: #f5f0e6;
+      border-radius: 8px;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    .story {
+      white-space: pre-wrap;
+      line-height: 1.8;
+      color: var(--text);
+      background: #14110f;
+      border-left: 2px solid var(--gold);
+      padding: 14px;
+      border-radius: 5px;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 25px 5px;
+    }
+
+    @media (max-width: 600px) {
+      .app {
+        padding: 10px;
+      }
+
+      .brand {
+        font-size: 30px;
+        letter-spacing: 5px;
+      }
+
+      .panel {
+        padding: 13px;
+      }
+
+      textarea {
+        min-height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1 class="brand">NOVYRA</h1>
+      <div class="subtitle">YOUR PRIVATE WORLD</div>
+    </header>
+
+    <section class="cover" id="cover">
+      <h2>Mənim şəxsi dünyam</h2>
+      <p class="hint">Özünü kəşf et. Düşüncələrini yaz. İnkişafını izlə.</p>
+
+      <label for="ownerName">Jurnalın sahibi</label>
+      <input id="ownerName" placeholder="Adını yaz">
+
+      <label for="journalName">Jurnalının adı</label>
+      <input id="journalName" placeholder="Məsələn: My Secret World">
+
+      <label for="coverImage">Üz qabığı üçün şəkil</label>
+      <input id="coverImage" type="file" accept="image/*">
+
+      <img id="coverPreview" class="hidden" alt="Jurnalın üz qabığı">
+
+      <button id="startButton" type="button">Jurnalımı aç</button>
+    </section>
+
+    <section id="journal" class="hidden">
+      <div class="panel">
+        <h2 id="welcomeTitle">Şəxsi jurnalına xoş gəldin</h2>
+        <p class="hint">Yazdıqların bu brauzerdə yadda saxlanacaq.</p>
+
+        <div class="row">
+          <button id="saveButton" type="button">Yadda saxla</button>
+          <button id="backCoverButton" class="secondary" type="button">Üz qabığına qayıt</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="page-heading">
+          <h2 id="pageTitle">Mənim səhifəm</h2>
+          <span id="pageNumber" class="page-number">1 / 200</span>
+        </div>
+
+        <div class="row">
+          <button id="prevButton" class="secondary" type="button">← Əvvəlki</button>
+          <button id="nextButton" type="button">Növbəti →</button>
+        </div>
+
+        <label for="pageJump">Səhifəyə keç</label>
+        <div class="row">
+          <input id="pageJump" type="number" min="1" max="200" placeholder="1-200">
+          <button id="jumpButton" type="button">Keç</button>
+        </div>
+
+        <label for="pageHeadingInput">Səhifənin başlığı</label>
+        <input id="pageHeadingInput" placeholder="Bu gün nə yazmaq istəyirsən?">
+
+        <label for="pageText">Düşüncələrin və qeydlərin</label>
+        <textarea id="pageText" placeholder="Burada öz dünyanı yarat..."></textarea>
+
+        <p class="hint">Yazılarını itirməmək üçün müntəzəm yadda saxla.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Gündəlik planlayıcı</h3>
+
+        <label for="planDate">Tarix</label>
+        <input id="planDate" type="date">
+
+        <label for="planType">Plan növü</label>
+        <select id="planType">
+          <option value="Saatlıq plan">Saatlıq plan</option>
+          <option value="Gündəlik plan">Gündəlik plan</option>
+          <option value="Həftəlik plan">Həftəlik plan</option>
+          <option value="Aylıq plan">Aylıq plan</option>
+        </select>
+
+        <label for="planTime">Saat (istəyə bağlı)</label>
+        <input id="planTime" type="time">
+
+        <label for="planTask">Tapşırıq</label>
+        <input id="planTask" placeholder="Məsələn: 20 yeni söz öyrən">
+
+        <button id="addPlanButton" type="button">Plana əlavə et</button>
+        <div id="planList"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Özünü kəşf et</h3>
+        <p id="reflectionPrompt" class="hint">
+          Hazırda özünü necə hiss edirsən?
+        </p>
+
+        <label for="reflectionText">Cavabın</label>
+        <textarea id="reflectionText" placeholder="Özünə qarşı dürüst ol..."></textarea>
+        <button id="saveReflectionButton" type="button">Cavabı yadda saxla</button>
+      </div>
+
+      <div class="panel">
+        <h3>Yaradıcılıq guşəsi</h3>
+        <p class="hint">Rəng seç, çək və ya səhifənə emoji əlavə et.</p>
+
+        <label for="drawColor">Qələm rəngi</label>
+        <input id="drawColor" type="color" value="#bda16a">
+
+        <label for="drawSize">Qələm ölçüsü</label>
+        <input id="drawSize" type="range" min="1" max="20" value="3">
+
+        <div class="row">
+          <button id="pencilButton" type="button">Qələm</button>
+          <button id="eraserButton" class="secondary" type="button">Pozan</button>
+          <button id="clearCanvasButton" class="secondary" type="button">Rəsmi sil</button>
+        </div>
+
+        <canvas id="drawingCanvas" width="900" height="400"></canvas>
+
+        <label for="stickerEmoji">Emoji stikeri</label>
+        <div class="row">
+          <select id="stickerEmoji">
+            <option>🖤</option>
+            <option>✨</option>
+            <option>🌙</option>
+            <option>🦋</option>
+            <option>🎀</option>
+            <option>⭐</option>
+            <option>📚</option>
+            <option>🌷</option>
+            <option>☁️</option>
+            <option>💌</option>
+          </select>
+          <button id="addStickerButton" type="button">Mətnə əlavə et</button>
+        </div>
+
+        <label for="pageImage">Qalereyadan şəkil seç</label>
+        <input id="pageImage" type="file" accept="image/*">
+        <div id="pageImagePreview"></div>
+      </div>
+
+      <div class="panel">
+        <h3>İngilis dili və tərcümə</h3>
+
+        <label for="translationDirection">Tərcümə istiqaməti</label>
+        <select id="translationDirection">
+          <option value="az|en">Azərbaycan dilindən ingilis dilinə</option>
+          <option value="en|az">İngilis dilindən Azərbaycan dilinə</option>
+        </select>
+
+        <label for="translationInput">Mətn</label>
+        <textarea id="translationInput" placeholder="Tərcümə ediləcək mətni yaz..."></textarea>
+
+        <button id="translateButton" type="button">Tərcümə et</button>
+        <p id="translationStatus" class="hint"></p>
+
+        <label for="translationOutput">Tərcümə nəticəsi</label>
+        <textarea id="translationOutput" readonly placeholder="Nəticə burada görünəcək..."></textarea>
+      </div>
+
+      <div class="panel">
+        <h3>Danışıq məşqi</h3>
+        <p class="hint">Səs yazmaq üçün brauzerin mikrofon icazəsi tələb oluna bilər.</p>
+
+        <div class="row">
+          <button id="recordButton" type="button">Səs yazmağa başla</button>
+          <button id="stopRecordButton" class="secondary" type="button" disabled>Səs yazısını dayandır</button>
+        </div>
+
+        <p id="recordStatus" class="hint"></p>
+        <div id="audioContainer"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Hekayə guşəsi</h3>
+        <p class="hint">Hər beşinci səhifədə yeni hekayə bölməsi göstəriləcək.</p>
+        <h3 id="storyTitle">Kiçik bir hekayə</h3>
+        <div id="storyText" class="story"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Gizli səhifə</h3>
+        <p class="hint">Şəxsi qeydlərin üçün kodla açılan bölmə.</p>
+
+        <label for="secretCode">Gizli kod</label>
+        <input id="secretCode" type="password" placeholder="Kodunu daxil et">
+
+        <div class="row">
+          <button id="openSecretButton" type="button">Gizli səhifəni aç</button>
+          <button id="setSecretButton" class="secondary" type="button">Kodu təyin et</button>
+        </div>
+
+        <div id="secretArea" class="hidden">
+          <label for="secretText">Gizli qeydlərin</label>
+          <textarea id="secretText" placeholder="Yalnız özün üçün..."></textarea>
+          <button id="saveSecretButton" type="button">Gizli qeydi yadda saxla</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Məlumatların ehtiyat nüsxəsi</h3>
+        <p class="hint">Jurnal məlumatlarını fayl kimi saxlaya və sonradan bərpa edə bilərsən.</p>
+
+        <div class="row">
+          <button id="exportButton" type="button">Ehtiyat nüsxəsini yüklə</button>
+        </div>
+
+        <label for="importFile">Əvvəlki nüsxəni bərpa et</label>
+        <input id="importFile" type="file" accept=".json,application/json">
+        <button id="importButton" type="button">Bərpa et</button>
+      </div>
+    </section>
+
+
+    <script>
+      "use strict";
+
+      const TOTAL_PAGES = 200;
+      const STORAGE_KEY = "novyra-journal-data-v1";
+
+      const $ = (id) => document.getElementById(id);
+
+      const defaultStories = [
+        {
+          title: "Birinci məktub",
+          text: "Bir gün Aylin köhnə kitabın arasında məktub tapdı. Məktubda yalnız bir cümlə yazılmışdı: Özünü tanımaqdan qorxma. Aylin əvvəlcə bunun kimdən gəldiyini bilmədi. O, günlərlə həmin sözlər haqqında düşündü. Nəhayət, öz arzularını dəftərinə yazmağa başladı."
+        },
+        {
+          title: "Ay işığında",
+          text: "Lalə hər gecə pəncərəsindən aya baxırdı. O, gələcəkdə başqa ölkələr görmək istəyirdi. Bir axşam xəritəsini açıb ilk məqsədini seçdi. Kiçik addımlarla dil öyrənməyə başladı. Bir müddət sonra əvvəlkindən daha inamlı olduğunu hiss etdi."
+        },
+        {
+          title: "Balaca kitabxana",
+          text: "Köhnə küçənin sonunda balaca bir kitabxana var idi. Nigar orada hər həftə yeni kitab oxuyurdu. Bir gün kitabxanaçı ona boş bir dəftər verdi. Nigar dəftərdə öz hekayələrini yazmağa başladı. Zaman keçdikcə yazmaq onun sevimli məşğuliyyətinə çevrildi."
+        },
+        {
+          title: "Yeni başlanğıc",
+          text: "Murad uzun müddət yeni bir işə başlamaqdan çəkinirdi. O, hər dəfə səhv etməkdən qorxurdu. Bir gün müəllimi ona səhvlərin öyrənməyin bir hissəsi olduğunu dedi. Murad kiçik bir addım atdı. Həmin gün hər şey dəyişmədi, amma o, artıq başlamışdı."
+        },
+        {
+          title: "Dostluğun gücü",
+          text: "Zəhra yeni məktəbdə özünü tək hiss edirdi. Bir gün sinif yoldaşı ona kitabını tapmaqda kömək etdi. Sadə bir söhbət dostluğun başlanğıcı oldu. Onlar bir-birlərinin fikirlərini dinləməyi öyrəndilər. Zəhra başa düşdü ki, yaxşı dostluq diqqət və hörmətlə qurulur."
+        }
+      ];
+
+      const reflectionPrompts = [
+        "Hazırda özümü necə hiss edirəm və bunun səbəbi nədir?",
+        "Bu gün özümlə bağlı nə öyrəndim?",
+        "Hansı bacarığımı inkişaf etdirmək istəyirəm?",
+        "Məni həqiqətən xoşbəxt edən nədir?",
+        "Gələcəkdəki özümə nə demək istərdim?",
+        "Bu həftə hansı məqsədimə yaxınlaşdım?",
+        "Nəyə görə özümlə fəxr edə bilərəm?"
+      ];
+
+      function createDefaultData() {
+        return {
+          ownerName: "",
+          journalName: "My Secret World",
+          coverImage: "",
+          secretCode: "",
+          pages: Array.from({ length: TOTAL_PAGES }, (_, index) => ({
+            heading: index === 0 ? "Mənim haqqımda" : "",
+            text: "",
+            reflection: "",
+            plans: [],
+            secretText: "",
+            drawing: "",
+            image: "",
+            audio: "",
+            storyNotes: ""
+          }))
+        };
+      }
+
+      function loadData() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return createDefaultData();
+
+          const saved = JSON.parse(raw);
+          const defaults = createDefaultData();
+
+          if (!saved || !Array.isArray(saved.pages)) {
+            return defaults;
+          }
+
+          defaults.ownerName = saved.ownerName || "";
+          defaults.journalName = saved.journalName || "My Secret World";
+          defaults.coverImage = saved.coverImage || "";
+          defaults.secretCode = saved.secretCode || "";
+
+          defaults.pages = defaults.pages.map((page, index) => ({
+            ...page,
+            ...(saved.pages[index] || {})
+          }));
+
+          return defaults;
+        } catch (error) {
+          console.error("Jurnal məlumatları oxunmadı:", error);
+          return createDefaultData();
+        }
+      }
+
+      let data = loadData();
+      let currentPage = 0;
+      let drawing = false;
+      let erasing = false;
+      let mediaRecorder = null;
+      let audioChunks = [];
+      let secretUnlocked = false;
+
+      function saveData(showMessage = false) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          if (showMessage) {
+            alert("Məlumatlar yadda saxlanıldı.");
+          }
+          return true;
+        } catch (error) {
+          console.error("Yadda saxlama xətası:", error);
+          alert(
+            "Məlumatlar yadda saxlanmadı. Brauzerin yaddaş limiti dolmuş ola bilər. Ehtiyat nüsxəsi yarat."
+          );
+          return false;
+        }
+      }
+
+      function getPage() {
+        return data.pages[currentPage];
+      }
+
+      function showCover() {
+        $("cover").classList.remove("hidden");
+        $("journal").classList.add("hidden");
+      }
+
+      function showJournal() {
+        $("cover").classList.add("hidden");
+        $("journal").classList.remove("hidden");
+        renderPage();
+      }
+
+      function updateCoverPreview() {
+        const preview = $("coverPreview");
+
+        if (data.coverImage) {
+          preview.src = data.coverImage;
+          preview.classList.remove("hidden");
+        } else {
+          preview.removeAttribute("src");
+          preview.classList.add("hidden");
+        }
+      }
+
+      function updateWelcome() {
+        const name = data.ownerName.trim();
+        $("welcomeTitle").textContent = name
+          ? `Xoş gəldin, ${name}!`
+          : "Şəxsi jurnalına xoş gəldin";
+
+        $("journalName").value = data.journalName;
+        $("ownerName").value = data.ownerName;
+      }
+
+      function updatePageNumber() {
+        $("pageNumber").textContent =
+          `${currentPage + 1} / ${TOTAL_PAGES}`;
+
+        $("prevButton").disabled = currentPage === 0;
+        $("nextButton").disabled = currentPage === TOTAL_PAGES - 1;
+        $("pageJump").value = currentPage + 1;
+      }
+
+      function renderReflection() {
+        const promptIndex = Math.floor(currentPage / 20) % reflectionPrompts.length;
+
+        if (currentPage % 20 === 0) {
+          $("reflectionPrompt").textContent =
+            reflectionPrompts[promptIndex];
+        } else {
+          $("reflectionPrompt").textContent =
+            "Bu səhifədə öz hisslərini, düşüncələrini və inkişafını qeyd edə bilərsən.";
+        }
+
+        $("reflectionText").value = getPage().reflection || "";
+      }
+
+      function renderPlans() {
+        const list = $("planList");
+        list.replaceChildren();
+
+        getPage().plans.forEach((plan, index) => {
+          const item = document.createElement("div");
+          item.className = "panel";
+
+          const text = document.createElement("p");
+          text.textContent =
+            `${plan.type || "Plan"} · ${plan.date || ""} · ` +
+            `${plan.time || ""} · ${plan.task || ""}`;
+
+          const remove = document.createElement("button");
+          remove.type = "button";
+          remove.className = "secondary";
+          remove.textContent = "Sil";
+
+          remove.addEventListener("click", () => {
+            getPage().plans.splice(index, 1);
+            saveData();
+            renderPlans();
+          });
+
+          item.append(text, remove);
+          list.appendChild(item);
+        });
+      }
+
+      function renderStory() {
+        const pageNumber = currentPage + 1;
+
+        if (pageNumber % 5 !== 0) {
+          $("storyTitle").textContent = "Hekayə guşəsi";
+          $("storyText").textContent =
+            "Hekayəni görmək üçün 5-ə bölünən səhifəyə keç.";
+          return;
+        }
+
+        const storyIndex =
+          (Math.floor(pageNumber / 5) - 1) % defaultStories.length;
+
+        const story = defaultStories[storyIndex];
+        $("storyTitle").textContent = story.title;
+        $("storyText").textContent = story.text;
+      }
+</script>
+
+      function renderPage() {
+        const page = getPage();
+
+        $("pageTitle").textContent = page.heading || `Səhifə ${currentPage + 1}`;
+        $("pageHeadingInput").value = page.heading || "";
+        $("pageText").value = page.text || "";
+
+        updatePageNumber();
+        renderReflection();
+        renderPlans();
+        renderStory();
+        renderDrawing();
+        renderPageImage();
+        renderAudio();
+      }
+
+      function goToPage(index) {
+        if (!Number.isInteger(index) || index < 0 || index >= TOTAL_PAGES) {
+          alert("Səhifə nömrəsi 1 ilə 200 arasında olmalıdır.");
+          return;
+        }
+
+        saveCurrentPage();
+        currentPage = index;
+        renderPage();
+      }
+
+      function saveCurrentPage() {
+        const page = getPage();
+
+        page.heading = $("pageHeadingInput").value;
+        page.text = $("pageText").value;
+        page.reflection = $("reflectionText").value;
+
+        saveData();
+      }
+
+      function renderPageImage() {
+        const container = $("pageImagePreview");
+        container.replaceChildren();
+
+        if (!getPage().image) return;
+
+        const image = document.createElement("img");
+        image.src = getPage().image;
+        image.alt = "Jurnal səhifəsinin şəkli";
+        image.style.maxWidth = "100%";
+        image.style.maxHeight = "260px";
+        image.style.marginTop = "12px";
+        image.style.borderRadius = "8px";
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "secondary";
+        remove.textContent = "Şəkli sil";
+
+        remove.addEventListener("click", () => {
+          getPage().image = "";
+          saveData();
+          renderPageImage();
+        });
+
+        container.append(image, remove);
+      }
+
+      function renderDrawing() {
+        const canvas = $("drawingCanvas");
+        const ctx = canvas.getContext("2d");
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#f5f0e6";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const savedDrawing = getPage().drawing;
+        if (!savedDrawing) return;
+
+        const image = new Image();
+        image.onload = () => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        };
+        image.src = savedDrawing;
+      }
+
+      function saveDrawing() {
+        try {
+          getPage().drawing = $("drawingCanvas").toDataURL("image/png");
+          saveData();
+        } catch (error) {
+          console.error("Rəsm yadda saxlanmadı:", error);
+        }
+      }
+
+      function renderAudio() {
+        const container = $("audioContainer");
+        container.replaceChildren();
+
+        if (!getPage().audio) return;
+
+        const audio = document.createElement("audio");
+        audio.controls = true;
+        audio.src = getPage().audio;
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "secondary";
+        remove.textContent = "Səs yazısını sil";
+
+        remove.addEventListener("click", () => {
+          getPage().audio = "";
+          saveData();
+          renderAudio();
+        });
+
+        container.append(audio, remove);
+      }
+
+      function readFileAsDataURL(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => reject(new Error("Fayl oxunmadı."));
+          reader.readAsDataURL(file);
+        });
+      }
+
+      $("startButton").addEventListener("click", () => {
+        data.ownerName = $("ownerName").value.trim();
+        data.journalName = $("journalName").value.trim() || "My Secret World";
+        saveData();
+        updateWelcome();
+        showJournal();
+      });
+
+      $("ownerName").addEventListener("change", () => {
+        data.ownerName = $("ownerName").value.trim();
+        saveData();
+      });
+
+      $("journalName").addEventListener("change", () => {
+        data.journalName = $("journalName").value.trim() || "My Secret World";
+        saveData();
+      });
+
+      $("coverImage").addEventListener("change", async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+          alert("Zəhmət olmasa, şəkil faylı seç.");
+          return;
+        }
+
+        try {
+          data.coverImage = await readFileAsDataURL(file);
+          updateCoverPreview();
+          saveData(true);
+        } catch {
+          alert("Şəkli oxumaq mümkün olmadı.");
+        }
+
+        event.target.value = "";
+      });
+
+      $("saveButton").addEventListener("click", () => {
+        saveCurrentPage();
+        saveData(true);
+      });
+
+      $("backCoverButton").addEventListener("click", () => {
+        saveCurrentPage();
+        showCover();
+      });
+
+      $("prevButton").addEventListener("click", () => {
+        goToPage(currentPage - 1);
+      });
+
+      $("nextButton").addEventListener("click", () => {
+        goToPage(currentPage + 1);
+      });
+
+      $("jumpButton").addEventListener("click", () => {
+        const number = Number($("pageJump").value);
+        goToPage(number - 1);
+      });
+
+      $("pageHeadingInput").addEventListener("input", () => {
+        getPage().heading = $("pageHeadingInput").value;
+        $("pageTitle").textContent =
+          getPage().heading || `Səhifə ${currentPage + 1}`;
+        saveData();
+      });
+
+      $("pageText").addEventListener("input", () => {
+        getPage().text = $("pageText").value;
+        saveData();
+      });
+
+      $("reflectionText").addEventListener("input", () => {
+        getPage().reflection = $("reflectionText").value;
+        saveData();
+      });
+
+      $("addPlanButton").addEventListener("click", () => {
+        const task = $("planTask").value.trim();
+
+        if (!task) {
+          alert("Əvvəlcə tapşırığını yaz.");
+          return;
+        }
+
+        getPage().plans.push({
+          type: $("planType").value,
+          date: $("planDate").value,
+          time: $("planTime").value,
+          task
+        });
+
+        $("planTask").value = "";
+        saveData();
+        renderPlans();
+      });
+
+      $("saveReflectionButton").addEventListener("click", () => {
+        getPage().reflection = $("reflectionText").value;
+        saveData(true);
+      });
+
+      $("addStickerButton").addEventListener("click", () => {
+        const emoji = $("stickerEmoji").value;
+        const textarea = $("pageText");
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const oldText = textarea.value;
+
+        textarea.value =
+          oldText.slice(0, start) + emoji + oldText.slice(end);
+
+        textarea.focus();
+        textarea.selectionStart = textarea.selectionEnd =
+          start + emoji.length;
+
+        getPage().text = textarea.value;
+        saveData();
+      });
+
+      $("pageImage").addEventListener("change", async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+          alert("Şəkil faylı seç.");
+          return;
+        }
+
+        try {
+          getPage().image = await readFileAsDataURL(file);
+          saveData();
+          renderPageImage();
+        } catch {
+          alert("Şəkli oxumaq mümkün olmadı.");
+        }
+
+        event.target.value = "";
+      });
+
+      const canvas = $("drawingCanvas");
+      const ctx = canvas.getContext("2d");
+
+      function getCanvasPosition(event) {
+        const rect = canvas.getBoundingClientRect();
+
+        return {
+          x: (event.clientX - rect.left) * canvas.width / rect.width,
+          y: (event.clientY - rect.top) * canvas.height / rect.height
+        };
+      }
+
+      canvas.addEventListener("pointerdown", (event) => {
+        drawing = true;
+        canvas.setPointerCapture(event.pointerId);
+
+        const point = getCanvasPosition(event);
+        ctx.beginPath();
+        ctx.moveTo(point.x, point.y);
+      });
+
+      canvas.addEventListener("pointermove", (event) => {
+        if (!drawing) return;
+
+        const point = getCanvasPosition(event);
+
+        ctx.lineWidth = Number($("drawSize").value);
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.strokeStyle = erasing ? "#f5f0e6" : $("drawColor").value;
+
+        ctx.lineTo(point.x, point.y);
+        ctx.stroke();
+      });
+
+      function finishDrawing() {
+        if (!drawing) return;
+
+        drawing = false;
+        saveDrawing();
+      }
+
+      canvas.addEventListener("pointerup", finishDrawing);
+      canvas.addEventListener("pointercancel", finishDrawing);
+
+      $("pencilButton").addEventListener("click", () => {
+        erasing = false;
+      });
+
+      $("eraserButton").addEventListener("click", () => {
+        erasing = true;
+      });
+
+      $("clearCanvasButton").addEventListener("click", () => {
+        if (!confirm("Bu səhifədəki rəsmi silmək istəyirsən?")) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#f5f0e6";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        getPage().drawing = "";
+        saveData();
+      });
+
+      $("translateButton").addEventListener("click", async () => {
+        const text = $("translationInput").value.trim();
+        const direction = $("translationDirection").value;
+        const output = $("translationOutput");
+        const status = $("translationStatus");
+
+        if (!text) {
+          status.textContent = "Əvvəlcə tərcümə ediləcək mətni yaz.";
+          return;
+        }
+
+        if (text.length > 4000) {
+          status.textContent = "Mətni 4000 simvoldan qısa et.";
+          return;
+        }
+
+        status.textContent = "Tərcümə edilir...";
+        output.value = "";
+        $("translateButton").disabled = true;
+
+        try {
+          const url = new URL("https://api.mymemory.translated.net/get");
+          url.searchParams.set("q", text);
+          url.searchParams.set("langpair", direction);
+
+          const response = await fetch(url.toString());
+
+          if (!response.ok) {
+            throw new Error("Tərcümə xidməti cavab vermədi.");
+          }
+
+          const result = await response.json();
+          const translated = result?.responseData?.translatedText;
+
+          if (!translated) {
+            throw new Error("Tərcümə nəticəsi alınmadı.");
+          }
+
+          output.value = translated;
+          status.textContent =
+            "Tərcümə hazırdır. Vacib mətnlərdə nəticəni yoxla.";
+        } catch (error) {
+          status.textContent =
+            "Tərcümə alınmadı. İnternet bağlantını yoxla və yenidən cəhd et.";
+        } finally {
+          $("translateButton").disabled = false;
+        }
+      });
+
+      $("recordButton").addEventListener("click", async () => {
+        if (!navigator.mediaDevices?.getUserMedia ||
+            typeof MediaRecorder === "undefined") {
+          $("recordStatus").textContent =
+            "Bu brauzer səs yazısını dəstəkləmir.";
+          return;
+        }
+
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true
+          });
+
+          audioChunks = [];
+          mediaRecorder = new MediaRecorder(stream);
+
+          mediaRecorder.addEventListener("dataavailable", (event) => {
+            if (event.data.size > 0) {
+              audioChunks.push(event.data);
+            }
+          });
+
+          mediaRecorder.addEventListener("stop", async () => {
+            try {
+              const blob = new Blob(audioChunks, {
+                type: mediaRecorder.mimeType || "audio/webm"
+              });
+
+              getPage().audio = await readFileAsDataURL(blob);
+              const saved = saveData();
+
+              renderAudio();
+
+              $("recordStatus").textContent = saved
+                ? "Səs yazısı bu səhifəyə əlavə edildi."
+                : "Yaddaş limiti səbəbindən səs yazısı saxlanmaya bilər.";
+            } catch {
+              $("recordStatus").textContent =
+                "Səs yazısını saxlamaq mümkün olmadı.";
+            } finally {
+              stream.getTracks().forEach((track) => track.stop());
+              $("recordButton").disabled = false;
+              $("stopRecordButton").disabled = true;
+            }
+          });
+
+          mediaRecorder.start();
+          $("recordButton").disabled = true;
+          $("stopRecordButton").disabled = false;
+          $("recordStatus").textContent = "Səs yazılır...";
+        } catch {
+          $("recordStatus").textContent =
+            "Mikrofon icazəsi verilmədi və ya mikrofon əlçatan deyil.";
+        }
+      });
+
+      $("stopRecordButton").addEventListener("click", () => {
+        if (mediaRecorder && mediaRecorder.state === "recording") {
+          mediaRecorder.stop();
+          $("recordStatus").textContent = "Səs yazısı hazırlanır...";
+        }
+      });
+
+      $("setSecretButton").addEventListener("click", () => {
+        const code = $("secretCode").value.trim();
+
+        if (code.length < 4) {
+          alert("Ən azı 4 simvolluq kod daxil et.");
+          return;
+        }
+
+        data.secretCode = code;
+        secretUnlocked = true;
+        $("secretText").value = getPage().secretText || "";
+        $("secretArea").classList.remove("hidden");
+        saveData(true);
+      });
+
+      $("openSecretButton").addEventListener("click", () => {
+        if (!data.secretCode) {
+          alert("Əvvəlcə özün üçün gizli kod təyin et.");
+          return;
+        }
+
+        if ($("secretCode").value !== data.secretCode) {
+          alert("Kod düzgün deyil.");
+          return;
+        }
+
+        secretUnlocked = true;
+        $("secretText").value = getPage().secretText || "";
+        $("secretArea").classList.remove("hidden");
+      });
+
+      $("saveSecretButton").addEventListener("click", () => {
+        if (!secretUnlocked) {
+          alert("Əvvəlcə gizli səhifəni aç.");
+          return;
+        }
+
+        getPage().secretText = $("secretText").value;
+        saveData(true);
+      });
+
+      $("exportButton").addEventListener("click", () => {
+        saveCurrentPage();
+
+        const backup = JSON.stringify(data, null, 2);
+        const blob = new Blob([backup], {
+          type: "application/json;charset=utf-8"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "Novyra-ehtiyat-nusxesi.json";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        URL.revokeObjectURL(url);
+      });
+
+      $("importButton").addEventListener("click", async () => {
+        const file = $("importFile").files[0];
+
+        if (!file) {
+          alert("Əvvəlcə ehtiyat nüsxəsi faylını seç.");
+          return;
+        }
+
+        if (!confirm("Mövcud jurnal məlumatları dəyişdiriləcək. Davam edək?")) {
+          return;
+        }
+
+        try {
+          const imported = JSON.parse(await file.text());
+
+          if (!imported || !Array.isArray(imported.pages)) {
+            throw new Error("Fayl formatı düzgün deyil.");
+          }
+
+          if (imported.pages.length !== TOTAL_PAGES) {
+            throw new Error("Faylda 200 səhifə olmalıdır.");
+          }
+
+          const newData = createDefaultData();
+
+          newData.ownerName = String(imported.ownerName || "");
+          newData.journalName = String(
+            imported.journalName || "My Secret World"
+          );
+          newData.coverImage = String(imported.coverImage || "");
+          newData.secretCode = String(imported.secretCode || "");
+
+          newData.pages = newData.pages.map((page, index) => {
+            const old = imported.pages[index];
+
+            return {
+              ...page,
+              heading: String(old.heading || ""),
+              text: String(old.text || ""),
+              reflection: String(old.reflection || ""),
+              plans: Array.isArray(old.plans) ? old.plans : [],
+              secretText: String(old.secretText || ""),
+              drawing: String(old.drawing || ""),
+              image: String(old.image || ""),
+              audio: String(old.audio || ""),
+              storyNotes: String(old.storyNotes || "")
+            };
+          });
+
+          const previousData = data;
+          data = newData;
+
+          if (!saveData()) {
+            data = previousData;
+            throw new Error("Yaddaş limiti dolub. Bərpa mümkün olmadı.");
+          }
+
+          currentPage = 0;
+          secretUnlocked = false;
+          $("secretArea").classList.add("hidden");
+          $("secretCode").value = "";
+
+          updateCoverPreview();
+          updateWelcome();
+          showJournal();
+
+          alert("Jurnal ehtiyat nüsxəsindən bərpa edildi.");
+        } catch (error) {
+          alert("Bərpa alınmadı: " + error.message);
+        }
+
+        $("importFile").value = "";
+      });
+
+      updateCoverPreview();
+      updateWelcome();
+
+      // Əvvəlki məlumatları bərpa et və jurnalın başlanğıcını göstər.
+      showCover();
+    </script>
+  </main>
+</body>
+</html>
